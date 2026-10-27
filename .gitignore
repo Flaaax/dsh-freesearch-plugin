@@ -1,0 +1,17 @@
+node_modules/
+_references/
+*.tgz
+*.log
+.env
+.env.*
+!.env.example
+coverage/
+dist/
+tmp/
+temp/
+.tmp/
+.cache/
+test-results/
+profiles/
+*.local
+

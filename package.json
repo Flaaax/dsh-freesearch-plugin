@@ -1,0 +1,34 @@
+{
+  "name": "dsh-minimal-free-search-plugin",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness 的最小权限免费网页搜索 provider",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": "./lib/index.js",
+  "files": [
+    "lib/",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "docs/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "test:live": "node test/live-smoke.mjs"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "web-search"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "cordis.patch.yml"
+    }
+  }
+}
+
