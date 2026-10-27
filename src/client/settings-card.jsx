@@ -14,8 +14,8 @@ import {
 /** configForms.get 使用的 Host 插件 entry id（对应 cordis.patch.yml 里 insert 的 id）。 */
 export const SETTINGS_ENTRY_ID = 'web-search-minimal-free'
 
-/** Plugins 页面 row 配置 slot 的 key（`<包名>#<row id>`）。 */
-export const ROW_CONFIG_KEY = 'dsh-minimal-free-search-plugin#web-search-minimal-free'
+/** Plugins 页面顶层（bundle）配置 slot 的 key（包名）。 */
+export const BUNDLE_CONFIG_KEY = 'dsh-minimal-free-search-plugin'
 
 /** 布尔字段：Switch 用 'true'/'false' 文本暂存。 */
 function booleanField(field) {

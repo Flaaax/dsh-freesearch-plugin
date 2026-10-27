@@ -21,7 +21,7 @@ DSH 原生 web_search
 - `lib/index.js`：Cordis 入口、Config Schema、provider 注册和 settings 生命周期。
 - `lib/client.js`：构建产物，Plugins 页面配置表单的 client 面（`window.__ModuleLoader__.load` 包装的浏览器 bundle）。
 - `src/client/settings-card.jsx`：React 配置卡片，渲染 7 个 volatile 字段并写入共享配置表单。
-- `src/client/index.jsx`：client 入口，把配置卡片注册到 `plugins.row.config` slot。
+- `src/client/index.jsx`：client 入口，把配置卡片注册到 `plugins.bundle.config` slot。
 - `scripts/build.mjs`：esbuild 构建 client bundle（external `react` 与 `@deepseek-ai/*`）。
 - `lib/provider.js`：查询校验、配置校验、串行回退和 provider 选择控制器。
 - `lib/network.js`：固定端点、查询编码、超时、重定向、响应类型和字节上限。
