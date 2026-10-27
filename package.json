@@ -10,10 +10,11 @@
     "cordis.patch.yml",
     "README.md",
     "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
     "docs/"
   ],
   "scripts": {
-    "test": "node --test",
+    "test": "node --test test/*.test.mjs",
     "test:live": "node test/live-smoke.mjs"
   },
   "keywords": [
@@ -22,12 +23,31 @@
     "web-search"
   ],
   "license": "MIT",
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.4"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=22"
   },
   "dsh": {
     "bundle": {
       "patch": "cordis.patch.yml"
+    },
+    "engines": {
+      "dsh": ">=0.2.1-rc.3 <0.3.0"
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.1-rc.3": "compatible"
+      }
     }
   }
 }

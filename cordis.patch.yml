@@ -1,3 +1,12 @@
-- id: web-search-minimal-free
-  name: dsh-minimal-free-search-plugin
+- insert:
+    - id: web-search-minimal-free
+      name: dsh-minimal-free-search-plugin
+      config:
+        takeover: true
+        preferredEngine: bing
+        fallback: true
+        market: zh-CN
+        safeSearch: moderate
+        timeoutMs: 10000
+        maxResults: 5
 
