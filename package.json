@@ -1,16 +1,20 @@
 {
   "name": "dsh-minimal-free-search-plugin",
   "version": "0.1.0",
-  "description": "DeepSeek Harness 的最小权限免费网页搜索 provider",
+  "description": "DeepSeek Harness 的免费网页搜索 provider",
+  "icon": "./icon.svg",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
   },
   "files": [
     "lib/",
+    "icon.svg",
+    "locale/*.json",
     "cordis.patch.yml",
     "README.md",
     "LICENSE",
