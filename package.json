@@ -4,7 +4,11 @@
   "description": "DeepSeek Harness 的最小权限免费网页搜索 provider",
   "type": "module",
   "main": "./lib/index.js",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
   "files": [
     "lib/",
     "cordis.patch.yml",
@@ -14,6 +18,7 @@
     "docs/"
   ],
   "scripts": {
+    "build": "node scripts/build.mjs",
     "test": "node --test test/*.test.mjs",
     "test:live": "node test/live-smoke.mjs",
     "test:host-live": "node test/dsh-host-smoke.mjs"
@@ -28,10 +33,30 @@
     "@deepseek-ai/schemastery": "^3.18.4"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1"
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-settings": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-slots": "0.2.1-rc.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-primitives": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-settings": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-slots": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
       "optional": true
     }
   },
@@ -41,6 +66,14 @@
   "dsh": {
     "bundle": {
       "patch": "cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
     },
     "engines": {
       "dsh": ">=0.2.1-rc.3 <0.3.0"
@@ -53,10 +86,16 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "^4.0.5",
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-settings": "0.2.1-rc.3",
+    "@deepseek-ai/dsh-client-ui-slots": "0.2.1-rc.3",
     "@deepseek-ai/dsh-llm": "^0.2.1-rc.3",
     "@deepseek-ai/dsh-system-prompt": "^0.2.1-rc.3",
     "@deepseek-ai/dsh-tool-web": "^0.2.1-rc.3",
     "@deepseek-ai/dsh-tools": "^0.2.1-rc.3",
-    "@deepseek-ai/dsh-web": "^0.2.1-rc.3"
+    "@deepseek-ai/dsh-web": "^0.2.1-rc.3",
+    "esbuild": "^0.25.11",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   }
 }

@@ -64,7 +64,7 @@ dsh plugin --profile desktop add dsh-minimal-free-search-plugin@<version>
 
 ## 配置
 
-Desktop 中打开“插件”，找到 `web-search-minimal-free` 行并进入配置。DSH 根据插件的公开 Config Schema 生成表单，不需要本插件自建网页或 HTTP 接口。
+Desktop 中打开“插件”，找到 `dsh-minimal-free-search-plugin` 包并展开 `web-search-minimal-free` 行，点击进入配置。配置表单由本插件自带的 client 面（`src/client/settings-card.jsx`，构建为 `lib/client.js`）提供，字段来自 DSH 原生 `Config` Schema。
 
 | 字段 | 默认值 | 限制 | 含义 |
 |---|---:|---|---|
