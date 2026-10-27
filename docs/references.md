@@ -19,7 +19,7 @@
   - `packages/boot/plugin-manager/src/operations.ts`
   - `packages/bundle/base/cordis.patch.yml`
 - 结论：`ctx.web` 公开注册、选择和执行 search/fetch provider；`web_search` 工具由 DSH 核心注册并负责不可信外部内容提示。provider 选择是 `web` 条目的 volatile 配置，公开的持久修改路径是 `settings.mutate()`。
-- 代码来源：未复制或实质改编代码；当前仅依据公开接口、生命周期和行为规格设计。
+- 代码来源：未复制 DSH 实现代码；仅依据公开接口、生命周期和行为规格设计。
 
 ## dsh-free-search
 
@@ -32,7 +32,7 @@
   - `cordis.patch.yml`
   - `lib/index.js`
 - 结论：该插件展示了 `registerSearchProvider()` 与 `settings.mutate("web", …)` 的兼容接法，也明确记录了持久 provider 选择在插件移除后可能悬空的问题。它还包含超出本项目第一版范围的 fetch provider、设置桥、凭据、多引擎和附加工具。
-- 代码来源：未复制或实质改编代码；不执行该仓库的脚本，也不安装或启用该插件。
+- 代码来源：Bing 跳转链接解包及两个 HTML 结果块识别思路作了缩小范围的实质改编，相关源码已注明 attribution，并在 `THIRD_PARTY_NOTICES.md` 保留 MIT 声明。不执行该仓库的脚本，也不安装或启用该插件。
 
 ## 本机说明
 

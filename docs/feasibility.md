@@ -45,7 +45,7 @@ volatile 引用只公开 `get()`，没有公开的进程内 `set()`；不能用�
 1. 安装后自动、持久地选择本插件；
 2. 无论用户通过哪条公开卸载路径移除，均自动恢复且绝不悬空。
 
-这是实施前必须确认的产品降级点。可接受方案见“阻塞结论”。
+用户已接受明确的安全撤销/卸载流程，并要求在 Desktop 插件配置中增加撤销 provider 的入口。实现使用公开 Config Schema 的 `takeover` 开关；关闭后仅在当前仍指向本插件时恢复官方 provider。
 
 ## 5. 是否依赖 web_fetch
 
@@ -76,7 +76,7 @@ Desktop `0.2.1-rc.3` 没有通用 provider 下拉框。“启用新版 Web 搜�
 
 DSH 将调用方的 `AbortSignal` 传给 provider。实现应把调用方 signal、严格总超时和插件生命周期 signal 合并；用户取消时不得回退。插件 dispose 时中止生命周期 signal，使所有正在进行的请求停止，然后由 Cordis disposer 注销 provider。
 
-## 阻塞结论
+## 已确认的降级方案
 
 接口足以实现搜索、回退、安全限制和正常注册/注销；唯一阻塞项是离线卸载后的 provider 恢复。
 
@@ -87,4 +87,4 @@ DSH 将调用方的 `AbortSignal` 传给 provider。实现应把调用方 signal
 3. **静态 bundle 覆盖**：bundle 移除时覆盖会自然消失，但单独禁用插件 row 时仍可能留下悬空选择，而且难以满足“不覆盖用户显式选择”，不推荐。
 4. **修改 DSH 生命周期/API**：为 provider selection 增加可释放的 lease 或让包管理器清理声明式 provider claim；超出本项目范围。
 
-在用户接受方案 1 或另行选择降级前，不继续实现运行时代码。
+项目采用方案 1，并增加以下缓解措施：正常 dispose 时条件恢复；Desktop 配置表单提供 `takeover` 撤销开关；README 明确推荐卸载顺序以及意外卸载后的重新安装恢复和手工恢复流程。离线卸载无法运行插件代码这一 DSH 生命周期事实仍作为已知限制保留。
