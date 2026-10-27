@@ -30,21 +30,7 @@ DSH Minimal Free Search 是一个面向 DeepSeek Harness（DSH）的最小权限
 
 ## 安装
 
-### 本地目录
-
-完全退出目标 DSH 进程后执行：
-
-```powershell
-dsh plugin --profile desktop add "E:\Projects\JavaScript\dsh-freesearch-plugin"
-```
-
-开发和验证应使用隔离 Profile：
-
-```powershell
-dsh plugin --profile plugin-dev add "E:\Projects\JavaScript\dsh-freesearch-plugin"
-```
-
-### GitHub URL
+### GitHub URL（推荐）
 
 从默认分支安装：
 
@@ -58,12 +44,12 @@ dsh plugin --profile desktop add "https://github.com/Flaaax/dsh-freesearch-plugi
 dsh plugin --profile desktop add "https://github.com/Flaaax/dsh-freesearch-plugin.git#v0.1.0"
 ```
 
-### npm
+### 本地目录
 
-计划包名为 `dsh-minimal-free-search-plugin`，当前尚未发布。发布后才可使用：
+将仓库 clone 到本地后，用本地目录路径安装。开发与集成验证应使用隔离 Profile：
 
 ```powershell
-dsh plugin --profile desktop add dsh-minimal-free-search-plugin@<version>
+dsh plugin --profile plugin-dev add "<本地仓库路径>"
 ```
 
 安装 Desktop 插件后必须完全退出并重新启动 DeepSeek Harness，仅刷新页面不够。
