@@ -2,6 +2,7 @@
   "name": "dsh-minimal-free-search-plugin",
   "version": "0.1.0",
   "description": "DeepSeek Harness 的免费网页搜索 provider",
+  "author": "Flaaax",
   "icon": "./icon.svg",
   "type": "module",
   "main": "./lib/index.js",

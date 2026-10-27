@@ -2,7 +2,7 @@
 
 DSH Minimal Free Search 是一个面向 DeepSeek Harness（DSH）的最小权限网页搜索插件。它只注册一个原生 `WebSearchProvider`，让 DSH 已有的 `web_search` 工具通过 Bing 或 DuckDuckGo Lite 返回候选网页，不需要搜索服务 API key。
 
-当前版本面向 DSH Desktop `0.2.1-rc.3`。项目尚未发布到 npm；仓库 URL 安装也要等仓库实际创建后才可用。
+当前版本面向 DSH Desktop `0.2.1-rc.3`。项目尚未发布到 npm；可通过 GitHub 仓库安装。
 
 ## 第一版边界
 
@@ -46,10 +46,16 @@ dsh plugin --profile plugin-dev add "E:\Projects\JavaScript\dsh-freesearch-plugi
 
 ### GitHub URL
 
-未来仓库公开后可使用以下形式；当前文档不声称该地址已经存在：
+从默认分支安装：
 
 ```powershell
-dsh plugin --profile desktop add "https://github.com/<owner>/dsh-minimal-free-search.git#<tag>"
+dsh plugin --profile desktop add "https://github.com/Flaaax/dsh-freesearch-plugin.git"
+```
+
+按指定版本（tag）安装：
+
+```powershell
+dsh plugin --profile desktop add "https://github.com/Flaaax/dsh-freesearch-plugin.git#v0.1.0"
 ```
 
 ### npm
@@ -181,4 +187,4 @@ npm run test:host-live
 
 ## 许可证与来源
 
-本项目采用 MIT License。接口依据 DSH `0.2.1-rc.3` 官方源码；部分 HTML 解析思路改编自 MIT 许可的 `dsh-free-search v0.9.16`。详情见 [docs/references.md](docs/references.md) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+本项目采用 MIT License。接口依据 DSH `0.2.1-rc.3` 官方源码；部分 HTML 解析思路改编自 MIT 许可的 `dsh-free-search v0.9.16`，其 MIT 声明保留于 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。详情见 [docs/references.md](docs/references.md)。
