@@ -2,6 +2,10 @@
 
 以下内容只是候选方向，不是当前能力或交付承诺。
 
+当前第一版之后的轻量搜索质量升级，按可独立交付的批次记录在
+[第二版搜索质量升级计划](v2-search-quality-plan.md)。该计划优先改善现有 Bing 和
+DuckDuckGo 的结果质量，不以增加搜索引擎数量为目标。
+
 ## v1.1：官方设置体验
 
 - 继续使用 DSH 公开 Config Schema、Client slot 和 settings API；
