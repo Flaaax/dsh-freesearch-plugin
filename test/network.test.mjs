@@ -14,6 +14,18 @@ test('查询只能进入编码后的固定查询参数', () => {
   assert.equal(url.searchParams.get('evil'), null)
 })
 
+test('auto 市场不向 Bing 发送 mkt，且 DDG kl 跟随查询语言', () => {
+  const auto = normalizeConfig({ market: 'auto' })
+  assert.equal(buildSearchUrl('bing', '清华大学 官网', auto, 5).searchParams.get('mkt'), null)
+  assert.equal(buildSearchUrl('duckduckgo', '清华大学 官网', auto, 5).searchParams.get('kl'), 'cn-zh')
+  assert.equal(buildSearchUrl('duckduckgo', 'OpenAI API', auto, 5).searchParams.get('kl'), 'us-en')
+})
+
+test('显式 zh-CN / en-US 仍发送对应 mkt', () => {
+  assert.equal(buildSearchUrl('bing', 'x', normalizeConfig({ market: 'zh-CN' }), 5).searchParams.get('mkt'), 'zh-CN')
+  assert.equal(buildSearchUrl('bing', 'x', normalizeConfig({ market: 'en-US' }), 5).searchParams.get('mkt'), 'en-US')
+})
+
 test('请求不发送 Cookie 或自定义身份信息', async () => {
   let observed
   const fetchImpl = async (url, options) => {

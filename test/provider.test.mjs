@@ -21,7 +21,7 @@ test('首选成功时不请求备用引擎', async () => {
     calls.push(new URL(url).hostname)
     return new Response(bing, { headers: { 'content-type': 'text/html' } })
   })
-  const result = await search.search({ query: 'hello', maxResults: 1 })
+  const result = await search.search({ query: 'alpha', maxResults: 1 })
   assert.equal(result.sources.length, 1)
   assert.deepEqual(calls, ['www.bing.com'])
 })
@@ -35,7 +35,7 @@ test('首选失败时只请求另一个固定引擎并记录实际引擎', async
     if (host === 'www.bing.com') return new Response('blocked captcha', { headers: { 'content-type': 'text/html' } })
     return new Response(duckduckgo, { headers: { 'content-type': 'text/html' } })
   }, used)
-  const result = await search.search({ query: 'hello', maxResults: 2 })
+  const result = await search.search({ query: 'one', maxResults: 2 })
   assert.equal(result.sources.length, 2)
   assert.deepEqual(calls, ['www.bing.com', 'lite.duckduckgo.com'])
   assert.deepEqual(used, ['duckduckgo'])
@@ -74,8 +74,33 @@ test('用户取消不触发回退', async () => {
 test('限制查询长度和结果数', async () => {
   const search = provider({ maxResults: 1 }, async () => new Response(bing, { headers: { 'content-type': 'text/html' } }))
   await assert.rejects(search.search({ query: 'x'.repeat(MAX_QUERY_CHARACTERS + 1) }), { code: 'SEARCH_QUERY_TOO_LONG' })
-  const result = await search.search({ query: 'hello', maxResults: 9 })
+  const result = await search.search({ query: 'alpha', maxResults: 9 })
   assert.equal(result.sources.length, 1)
+})
+
+test('首选引擎返回无关错页时回退到备用引擎', async () => {
+  const used = []
+  const search = provider({}, async url => {
+    const host = new URL(url).hostname
+    if (host === 'www.bing.com') {
+      return new Response('<li class="b_algo"><h2><a href="https://pinduoduo.example/x">多多招财</a></h2><p>拼多多推广</p></li>', { headers: { 'content-type': 'text/html' } })
+    }
+    return new Response('<a class="result-link" href="https://www.tsinghua.edu.cn">清华大学</a><td class="result-snippet">官网</td>', { headers: { 'content-type': 'text/html' } })
+  }, used)
+  const result = await search.search({ query: '清华大学 官网', maxResults: 5 })
+  assert.equal(result.sources[0].url, 'https://www.tsinghua.edu.cn/')
+  assert.deepEqual(used, ['duckduckgo'])
+})
+
+test('两个引擎都返回无关错页时抛出不可用错误', async () => {
+  const search = provider({}, async url => {
+    const host = new URL(url).hostname
+    if (host === 'www.bing.com') {
+      return new Response('<li class="b_algo"><h2><a href="https://x.example/a">拼多多</a></h2><p>y</p></li>', { headers: { 'content-type': 'text/html' } })
+    }
+    return new Response('<a class="result-link" href="https://y.example/b">抖音</a><td class="result-snippet">c</td>', { headers: { 'content-type': 'text/html' } })
+  })
+  await assert.rejects(search.search({ query: '清华大学 官网' }), { code: 'SEARCH_ALL_ENGINES_FAILED' })
 })
 
 test('配置枚举和数值上下界有效', () => {

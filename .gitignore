@@ -13,6 +13,7 @@ temp/
 .tmp/
 .cache/
 test-results/
+bench/
 profiles/
 *.local
 
